@@ -1,6 +1,9 @@
-<div *ngFor="let row of grid">
-  <div [ngStyle]="{'background-color': c(cell)}" class="tile" *ngFor="let cell of row">
-    <!-- {{ cell != 0 ? cell : '&nbsp;&nbsp;' }} -->
-    {{ cell }}
-  </div><br>
+<div class="container">
+  <div class="content">
+    <div *ngFor="let row of grid">
+      <div [ngStyle]="{'background-color': c(cell)}" class="tile" *ngFor="let cell of row">
+        {{ cell }}
+      </div><br>
+    </div>
+  </div>
 </div>

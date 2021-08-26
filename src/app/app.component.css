@@ -1,10 +1,19 @@
 .tile {
-  font-family: cursive;
+  font-family: sans-serif;
+  font-size: 20pt;
   margin: 5px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  padding-left: 35px;
+  padding-right: 35px;
   display: inline-block;
-  color: white;
+  color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.container {
+  padding-top: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
