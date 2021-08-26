@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="content">
+  <div>
     <div *ngFor="let row of grid">
-      <div [ngStyle]="{'background-color': c(cell)}" class="tile" *ngFor="let cell of row">
+      <div [ngStyle]="{'background-color': colo(cell)}" class="tile" *ngFor="let cell of row">
         {{ cell }}
       </div><br>
     </div>

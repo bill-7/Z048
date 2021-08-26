@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,11 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
   host: { '(document:keypress)': 'key($event)' }
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  grid = [[0, 0, 2, 0], [0, 2, 0, 0], [0, 0, 0, 0], [2, 0, 0, 0]]
+  ngOnInit() { console.log("hi"); this.add(); this.add() }
 
-  key(event: any) {
+  grid = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+
+  spin = () => this.grid = this.grid.map((_, c) => this.grid.map(row => row[c]));
+  flip = () => this.grid.forEach(row => row.reverse())
+  fsf = () => { this.flip(); this.spin(); this.flip(); }
+  h = (n: number) => n.toString(16).slice(0, 2).padEnd(2, '0')
+  colo = (n: number) => (n == 0) ? "#f0f0f0" : '#' + this.h(n) + this.h(n * 2) + this.h(n * 4);
+
+  key = (event: any) => {
     switch (event.key) {
       case 'a': this.move(); break
       case 'd': this.flip(); this.move(); this.flip(); break
@@ -20,9 +28,12 @@ export class AppComponent {
     this.add();
   }
 
-  fsf = () => { this.flip(); this.spin(); this.flip(); }
-  spin = () => this.grid = this.grid.map((_, c) => this.grid.map(row => row[c]));
-  flip = () => this.grid.forEach(row => row.reverse())
+  add = () => {
+    const x = Math.floor(Math.random() * 3)
+    const y = Math.floor(Math.random() * 3)
+    this.grid[x][y] == 0 ? this.grid[x][y] = Math.floor(Math.random() * 1) + 1 * 2 : this.add()
+  }
+
   move = () => {
     this.grid.forEach((row, i) => {
       row.forEach((cell, j) => {
@@ -51,18 +62,5 @@ export class AppComponent {
         }
       })
     })
-  }
-
-  add = () => {
-    const x = Math.floor(Math.random() * 3)
-    const y = Math.floor(Math.random() * 3)
-    this.grid[x][y] == 0 ? this.grid[x][y] = Math.floor(Math.random() * 1) + 1 * 2 : this.add()
-  }
-
-  c(n: number): string {
-    if (n == 0) return "#f0f0f0"
-    if (n == 1) return "blue"
-    if (n == 2) return "green"
-    return "grey"
   }
 }

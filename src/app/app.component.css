@@ -1,14 +1,14 @@
 .tile {
   font-family: sans-serif;
-  font-size: 20pt;
-  margin: 5px;
-  padding-top: 28px;
-  padding-bottom: 28px;
-  padding-left: 35px;
-  padding-right: 35px;
+  font-size: 3vh;
+  margin: 0.5vh;
+  width: 10vh;
+  height: 10vh;
+  line-height: 10vh;
+  text-align: center;
   display: inline-block;
   color: #f0f0f0;
-  border-radius: 4px;
+  border-radius: 0.75vh;
 }
 
 .container {
