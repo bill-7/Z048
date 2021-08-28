@@ -2,7 +2,7 @@
   <div>
     <div *ngFor="let row of grid">
       <div [ngStyle]="{'background-color': colo(cell)}" class="tile" *ngFor="let cell of row">
-        {{ cell }}
+        {{ !!cell ? cell : '&nbsp;' }}
       </div><br>
     </div>
   </div>

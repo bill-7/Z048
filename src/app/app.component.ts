@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,24 +8,29 @@ import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/cor
 })
 export class AppComponent implements OnInit {
 
-  ngOnInit() { console.log("hi"); this.add(); this.add() }
+  ngOnInit() { this.add(); this.add() }
 
   grid = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+  modi = false
 
   spin = () => this.grid = this.grid.map((_, c) => this.grid.map(row => row[c]));
   flip = () => this.grid.forEach(row => row.reverse())
   fsf = () => { this.flip(); this.spin(); this.flip(); }
-  h = (n: number) => n.toString(16).slice(0, 2).padEnd(2, '0')
-  colo = (n: number) => (n == 0) ? "#f0f0f0" : '#' + this.h(n) + this.h(n * 2) + this.h(n * 4);
+
+  colo = (n: number) => {
+    const h = (x: number) => x.toString(16).slice(0, 2).padEnd(2, '0')
+    return !n ? '#181818' : '#' + h(n ^ 7) + h(n ^ 3) + h(n ^ 5)
+  }
 
   key = (event: any) => {
+    this.modi = false
     switch (event.key) {
       case 'a': this.move(); break
       case 'd': this.flip(); this.move(); this.flip(); break
       case 'w': this.spin(); this.move(); this.spin(); break
       case 's': this.fsf(); this.move(); this.fsf(); break
     }
-    this.add();
+    if (this.modi) this.add()
   }
 
   add = () => {
@@ -44,6 +49,7 @@ export class AppComponent implements OnInit {
             else if (this.grid[i][q] == cell) {
               this.grid[i][j] *= 2
               this.grid[i][q] = 0
+              this.modi = true
               break
             }
             else break
@@ -56,6 +62,7 @@ export class AppComponent implements OnInit {
             if (this.grid[i][x] == 0) {
               this.grid[i][x] = cell
               this.grid[i][j] = 0
+              this.modi = true
               break
             }
           }
