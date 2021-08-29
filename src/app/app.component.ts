@@ -34,9 +34,9 @@ export class AppComponent implements OnInit {
   }
 
   add = () => {
-    const x = Math.floor(Math.random() * 3)
-    const y = Math.floor(Math.random() * 3)
-    this.grid[x][y] == 0 ? this.grid[x][y] = Math.floor(Math.random() * 1) + 1 * 2 : this.add()
+    const x = Math.floor(Math.random() * 4)
+    const y = Math.floor(Math.random() * 4)
+    this.grid[x][y] == 0 ? this.grid[x][y] = (Math.floor(Math.random() * 2) + 1) * 2 : this.add()
   }
 
   move = () => {
